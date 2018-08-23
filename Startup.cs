@@ -40,13 +40,16 @@ namespace DKP
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // Only going to use SQLite locally - SQL Server or Postgres in production...
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-                                                            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAutoMapper();
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            // Define ENCRYPTION_SECRET in env vars
             var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("ENCRYPTION_SECRET") ?? "Secret");
 
             services.AddAuthentication(x =>
