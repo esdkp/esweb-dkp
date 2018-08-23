@@ -21,5 +21,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Helpers\DataContext.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
   </ItemGroup>
 </Project>
