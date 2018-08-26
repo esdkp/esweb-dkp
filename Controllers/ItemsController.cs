@@ -4,17 +4,19 @@ using System.Linq;
 using AutoMapper;
 using DKP.Data;
 using DKP.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace DKP.Controllers
 {
+    [Authorize]
+    [ApiController]
     [Route("api/[controller]")]
     public class ItemsController : Controller
     {
-
-        ApplicationDbContext _context;
-        IMapper _mapper;
+        private readonly IMapper _mapper;
+        private readonly ApplicationDbContext _context;
 
         public ItemsController(ApplicationDbContext context, IMapper mapper) {
             _context = context;
@@ -22,6 +24,7 @@ namespace DKP.Controllers
         }
 
         // GET: api/items
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Item> Get()
         {
@@ -29,6 +32,7 @@ namespace DKP.Controllers
         }
 
         // GET api/items/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public Item Get(int id)
         {

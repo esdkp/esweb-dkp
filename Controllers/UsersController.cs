@@ -16,14 +16,12 @@ namespace DKP.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : Controller
     {
-        IMapper _mapper;
-        readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
-        public UsersController(
-            IUserService userService,
-            IMapper mapper)
+        public UsersController(IUserService userService, IMapper mapper)
         {
             _mapper = mapper;
             _userService = userService;
