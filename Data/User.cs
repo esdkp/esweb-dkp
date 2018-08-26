@@ -1,8 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace DKP.Data
 {
     public class User
     {
+        [Key]
         public int Id { get; set; }
         public string Username { get; set; }
         public byte[] PasswordHash { get; set; }

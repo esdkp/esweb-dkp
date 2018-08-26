@@ -33,6 +33,7 @@ namespace DKP
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connString = $"Server=db;Port=5432;Database=DKPdb;User Id=abcuser;Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -40,10 +41,8 @@ namespace DKP
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            // Only going to use SQLite locally - SQL Server or Postgres in production...
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseNpgsql(connString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAutoMapper();

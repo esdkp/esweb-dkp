@@ -4,4 +4,17 @@ services:
         build: .
         ports:
             - "8000:80"
-
+        depends_on:
+            - db
+        environment:
+            ENCRYPTION_SECRET: "${ENCRYPTION_SECRET}"
+            DB_PASSWORD: "${DB_PASSWORD}"
+    db:
+        image: postgres
+        restart: "no"
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_PASSWORD: "${DB_PASSWORD}"
+            POSTGRES_USER: abcuser
+            POSTGRES_DB: DKPDB
