@@ -75,12 +75,10 @@ namespace DKP.Controllers
             }
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll()
+        [HttpGet("verify")]
+        public IActionResult Verify()
         {
-            var users = _userService.GetAll();
-            var userDtos = _mapper.Map<IList<UserDto>>(users);
-            return Ok(userDtos);
+            return Ok(new { Message = "Success"});
         }
 
     }
